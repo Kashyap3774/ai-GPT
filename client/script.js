@@ -3,8 +3,17 @@ import user from "./assets/user.svg";
 
 const form = document.querySelector("form");
 const chatContainer = document.querySelector("#chat_container");
+const GPTlogoContainer = document.querySelector("#GPTlogo");
 
 let loadInterval;
+
+function setVh() {
+  const vh = window.innerHeight * 0.0098;
+  document.getElementsByTagName("html")[0].style.setProperty("--vh", `${vh}px`);
+}
+setVh();
+
+window.addEventListener("resize", setVh);
 
 function loader(element) {
   element.textContent = "";
@@ -65,6 +74,9 @@ function chatStripe(isAi, value, uniqueId) {
 const handleSubmit = async (e) => {
   e.preventDefault();
 
+  if (!GPTlogoContainer?.classList?.contains("hide")) {
+    GPTlogoContainer.classList.add("hide");
+  }
   const data = new FormData(form);
 
   // user's chatstripe
